@@ -113,3 +113,20 @@ cv2.imwrite('test_images_output/gray.png', gray)
 After this step, we can not see much difference.But the image has been changed to gray in the background.
 
 <img src="https://user-images.githubusercontent.com/40875720/51322072-65b51800-1a9f-11e9-9820-08b26abfe8a4.PNG" width="600">
+
+## Step 4: Gaussion smoothing
+
+For more details regardisng Gaussion and Canny please find the material from PyimageSearch
+[here](https://gurus.pyimagesearch.com/courses/pyimagesearch-gurus-course/)
+
+```
+#### Forth Step: Gaussian smoothing
+# This step is optional due to the fact that Ganny also did Gaussian blur
+# Question: How the pic shows not correct?
+
+blur_gray = gaussian_blur(gray, 3)
+plt.imshow(blur_gray)
+plt.show()
+```
+
+<img src="https://user-images.githubusercontent.com/40875720/51322845-8aaa8a80-1aa1-11e9-94f5-90b2a3f9f7fd.PNG" width="600">
