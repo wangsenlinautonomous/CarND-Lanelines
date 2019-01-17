@@ -38,7 +38,9 @@ Project: Finding Lane Lines on the Road
 * Detect lane lines in video
 * Show the result in the video
 
-# Overview
+<img src="https://user-images.githubusercontent.com/40875720/51319804-081dcd00-1a99-11e9-99a1-50c3532587de.PNG" width="600">
+
+## Overview
 The project contains the following steps:
 * Color selection
 * ROI & Markout lane with red color
@@ -47,3 +49,29 @@ The project contains the following steps:
 * Canny
 * Hough transform lane detection
 * Draw lanes
+
+## Color selection
+The first step is color selection, lane lines' color are write, based on this situation, we can roughly fiter out the lanes according to the R G B value in the color space. The realization are as below:
+
+```
+#### First Step:Color selection
+
+#Define color selection criteria
+color_select = np.copy(image)
+red_threshold = 200
+green_threshold = 200
+blue_threshold = 200
+
+rgb_threshold = [red_threshold, green_threshold, blue_threshold]
+
+# Do a boolean or with the "|" character to identify
+# pixels below the thresholds
+thresholds = (image[:,:,0] < rgb_threshold[0]) \
+            | (image[:,:,1] < rgb_threshold[1]) \
+            | (image[:,:,2] < rgb_threshold[2])
+color_select[thresholds] = [0,0,0]
+
+plt.imshow(color_select)
+plt.show()
+cv2.imwrite('test_images_output/color_selection.png', color_select)
+```
