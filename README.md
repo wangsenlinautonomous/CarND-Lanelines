@@ -30,3 +30,20 @@ Jupyter is an Ipython notebook where you can run blocks of code and see results 
 `> jupyter notebook`
 
 A browser window will appear showing the contents of the current directory.  Click on the file called "P1.ipynb".  Another browser window will appear displaying the notebook.  Follow the instructions in the notebook to complete the project.  
+
+Project: Finding Lane Lines on the Road
+---
+# Objectives
+* Detect lane lines in image
+* Detect lane lines in video
+* Show the result in the video
+
+# Overview
+The project contains the following steps:
+* Color selection
+* ROI & Markout lane with red color
+* Gray Scaling
+* Gaussion smoothing
+* Canny
+* Hough transform lane detection
+* Draw lanes
