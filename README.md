@@ -33,12 +33,16 @@ A browser window will appear showing the contents of the current directory.  Cli
 
 Project: Finding Lane Lines on the Road
 ---
-# Objectives
+## Objectives
 * Detect lane lines in image
 * Detect lane lines in video
 * Show the result in the video
 
 <img src="https://user-images.githubusercontent.com/40875720/51319804-081dcd00-1a99-11e9-99a1-50c3532587de.PNG" width="600">
+
+The following is the test image, my object is to find the lane lines in the image.
+<img src="https://user-images.githubusercontent.com/40875720/51320842-0e617880-1a9c-11e9-8e5d-c74470c10a27.PNG" width="600">
+
 
 ## Overview
 The project contains the following steps:
@@ -50,7 +54,7 @@ The project contains the following steps:
 * Hough transform lane detection
 * Draw lanes
 
-## Color selection
+##  Step 1: Color selection
 The first step is color selection, lane lines' color are write, based on this situation, we can roughly fiter out the lanes according to the R G B value in the color space. The realization are as below:
 
 ```
@@ -75,3 +79,37 @@ plt.imshow(color_select)
 plt.show()
 cv2.imwrite('test_images_output/color_selection.png', color_select)
 ```
+After the first step, we can get the result like below. From the result we can tell that the code can fiter out some write part but also include some noise(the write car)
+
+<img src="https://user-images.githubusercontent.com/40875720/51321213-28e82180-1a9d-11e9-9f7d-3b8117b84f18.PNG" width="600">
+
+## Step 2: ROI & Markout lane with red color
+The purpose of this step is to reduce the computering resouce needed. We can only foucs on the ROI.
+
+```
+#### Second Step: ROI finding and mark out the lane with Red color
+
+vertices = np.array([[(0,539),(440, 330), (520, 330), (939,539)]], dtype=np.int32)
+line_image = np.copy(image)
+roi_image = region_of_interest(color_select, vertices)
+plt.imshow(roi_image)
+plt.show()
+cv2.imwrite('test_images_output/roi_image.png', roi_image)
+```
+After this step, we can see that the code fiter out most noise due to the fact that we only foucs on ROI and fill in other parts as 0.
+
+<img src="https://user-images.githubusercontent.com/40875720/51321452-c6dbec00-1a9d-11e9-8f9f-083a648ce5d8.PNG" width="600">
+
+## Step 3: Gray Scaling
+The purpose of this step is quite obvious, Canny need to run on gray image.
+
+```
+gray = grayscale(roi_image)
+plt.imshow(gray, cmap='gray')
+plt.show()
+cv2.imwrite('test_images_output/gray.png', gray)
+```
+
+After this step, we can not see much difference.But the image has been changed to gray in the background.
+
+<img src="https://user-images.githubusercontent.com/40875720/51322072-65b51800-1a9f-11e9-9820-08b26abfe8a4.PNG" width="600">
